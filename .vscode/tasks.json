@@ -4,7 +4,7 @@
 		{
 			"label": "Run Voice Tech 2026",
 			"type": "shell",
-			"command": "npm run dev --prefix voice-tech-2026",
+			"command": "npm run dev",
 			"args": [],
 			"isBackground": true,
 			"problemMatcher": [
