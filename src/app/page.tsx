@@ -26,6 +26,7 @@ function SectionHeader({
   icon: Icon,
   align = "center",
   action,
+  headingId,
 }: {
   eyebrow: string;
   title: string;
@@ -33,21 +34,25 @@ function SectionHeader({
   icon?: React.ComponentType<{ className?: string }>;
   align?: "center" | "left";
   action?: React.ReactNode;
+  headingId?: string;
 }) {
   const textAlign = align === "center" ? "text-center items-center" : "text-left items-start";
   return (
-    <div className={`flex flex-col ${textAlign} mb-12`}>
-      <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary mb-3">
-        {Icon && <Icon className="h-3.5 w-3.5" />}
+    <div className={`flex flex-col ${textAlign} mb-10`}>
+      <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-primary mb-3">
+        {Icon && <Icon className="h-3 w-3" aria-hidden="true" />}
         {eyebrow}
       </p>
       <div className={`flex flex-wrap ${align === "center" ? "justify-center" : "justify-between"} items-end gap-4 w-full`}>
         <div className={align === "center" ? "text-center" : ""}>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+          <h2
+            id={headingId}
+            className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground"
+          >
             {title}
           </h2>
           {description && (
-            <p className={`mt-3 text-base text-muted-foreground ${align === "center" ? "max-w-2xl mx-auto" : "max-w-2xl"}`}>
+            <p className={`mt-2.5 text-sm text-muted-foreground leading-relaxed ${align === "center" ? "max-w-2xl mx-auto" : "max-w-2xl"}`}>
               {description}
             </p>
           )}
@@ -170,13 +175,13 @@ export default function Home() {
     <div className="min-h-screen">
 
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
-      <section className="relative px-6 lg:px-8 py-28 sm:py-36 lg:py-44 overflow-hidden">
+      <section className="relative px-6 lg:px-8 py-20 sm:py-28 lg:py-32 overflow-hidden">
         <div className="mx-auto max-w-4xl text-center relative z-10">
           <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold tracking-wide text-primary mb-8">
             Updated April 2026 &mdash; Mistral Voxtral · xAI Grok · Microsoft MAI
           </div>
 
-          <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6">
+          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.05] mb-6">
             <span className="bg-clip-text text-transparent bg-gradient-to-br from-foreground via-foreground to-foreground/40">
               The independent voice AI
             </span>
@@ -234,14 +239,15 @@ export default function Home() {
       <section
         id="leaderboard"
         aria-labelledby="leaderboard-heading"
-        className="py-20 sm:py-28 scroll-mt-24"
+        className="py-16 sm:py-24 scroll-mt-24"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeader
+            headingId="leaderboard-heading"
             eyebrow="Independent Benchmarks"
             icon={BarChart3}
             title="Market Leaders at a Glance"
-            description="Quality, Speed, Feature richness, and Price efficiency across all active providers — sorted by composite value score."
+            description="Quality, speed, features, and price efficiency across all active providers — sorted by composite value score."
           />
           <Leaderboard />
         </div>
@@ -251,10 +257,11 @@ export default function Home() {
       <section
         id="quiz"
         aria-labelledby="quiz-heading"
-        className="py-20 sm:py-28 bg-secondary/10 border-y border-border/40 scroll-mt-24"
+        className="py-16 sm:py-24 bg-secondary/10 border-y border-border/40 scroll-mt-24"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeader
+            headingId="quiz-heading"
             eyebrow="Recommendation Engine"
             icon={Wand2}
             title="Find Your Perfect Stack"
@@ -268,14 +275,15 @@ export default function Home() {
       <section
         id="updates"
         aria-labelledby="updates-heading"
-        className="py-20 sm:py-28 scroll-mt-24"
+        className="py-16 sm:py-24 scroll-mt-24"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeader
+            headingId="updates-heading"
             eyebrow="Market Updates — April 2026"
             icon={Newspaper}
-            title="What Changed Since February"
-            description="Three new TTS entrants, open-source models now beating commercial leaders, and one major shutdown."
+            title="What Changed This Quarter"
+            description="Three new entrants, open-source models beating commercial leaders, and one major shutdown."
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {marketUpdates.map(({ badge, badgeClass, title, body }) => (
@@ -286,8 +294,8 @@ export default function Home() {
                 <span className={`self-start text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeClass}`}>
                   {badge}
                 </span>
-                <h3 className="font-semibold text-foreground text-sm leading-snug">{title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{body}</p>
+                <h3 className="font-semibold text-foreground text-[13px] leading-snug">{title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{body}</p>
               </article>
             ))}
           </div>
@@ -298,10 +306,11 @@ export default function Home() {
       <section
         id="compare"
         aria-labelledby="compare-heading"
-        className="py-20 sm:py-28 bg-secondary/10 border-y border-border/40 scroll-mt-24"
+        className="py-16 sm:py-24 bg-secondary/10 border-y border-border/40 scroll-mt-24"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeader
+            headingId="compare-heading"
             eyebrow="Provider Comparison"
             icon={Layers}
             title="Compare All Providers"
@@ -335,10 +344,11 @@ export default function Home() {
       <section
         id="calculator"
         aria-labelledby="calculator-heading"
-        className="py-20 sm:py-28 scroll-mt-24"
+        className="py-16 sm:py-24 scroll-mt-24"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeader
+            headingId="calculator-heading"
             eyebrow="Pricing Calculator"
             icon={Calculator}
             title="Estimate Your Monthly Cost"
@@ -362,13 +372,14 @@ export default function Home() {
       <section
         id="use-cases"
         aria-labelledby="use-cases-heading"
-        className="py-20 sm:py-28 bg-secondary/10 border-t border-border/40 scroll-mt-24"
+        className="py-16 sm:py-24 bg-secondary/10 border-t border-border/40 scroll-mt-24"
       >
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <SectionHeader
+            headingId="use-cases-heading"
             eyebrow="Community Picks"
             title="Best Provider by Use Case"
-            description="Ranked by the community based on real production deployments, blind tests, and Artificial Analysis benchmarks."
+            description="Ranked from real production deployments, blind tests, and Artificial Analysis benchmarks."
           />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {useCases.map(({ title, icon, picks }) => (
@@ -388,7 +399,7 @@ export default function Home() {
                 </div>
                 <ol className="space-y-2">
                   {picks.map((pick, i) => (
-                    <li key={pick} className="flex items-start gap-2.5 text-xs text-muted-foreground">
+                    <li key={pick} className="flex items-start gap-2.5 text-sm text-muted-foreground">
                       <span className="font-bold tabular-nums text-primary shrink-0 mt-px">{i + 1}.</span>
                       <span>{pick}</span>
                     </li>

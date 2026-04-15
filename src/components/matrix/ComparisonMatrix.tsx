@@ -4,7 +4,6 @@ import { useState, useId } from "react";
 import { providers, Provider } from "@/data/providers";
 import { Check, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 
 const TOOLTIPS: Record<string, string> = {
     WER: "Word Error Rate — lower is better. Measures the % of words incorrectly transcribed.",
@@ -72,12 +71,7 @@ export function ComparisonMatrix() {
         .filter((p) => !showDiff || p.status !== "discontinued");
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="overflow-x-auto pb-6"
-        >
+        <div className="overflow-x-auto pb-6 animate-fade-up">
             {/* Controls */}
             <div className="flex flex-wrap justify-between items-center gap-4 mb-6">
                 <fieldset className="flex gap-2 p-1 bg-secondary/50 rounded-lg" aria-label="Filter by type">
@@ -354,6 +348,6 @@ export function ComparisonMatrix() {
                 Data sourced from Artificial Analysis Speech Arena, HuggingFace Open ASR Leaderboard, and official provider documentation.
                 All prices approximate as of April 2026. Benchmark scores may vary by use case.
             </p>
-        </motion.div>
+        </div>
     );
 }

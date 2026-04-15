@@ -12,7 +12,6 @@ import {
     Tooltip,
     Legend,
 } from "recharts";
-import { motion } from "framer-motion";
 
 const CustomTooltip = ({ active, payload, label }: {
     active?: boolean;
@@ -70,13 +69,7 @@ export function Leaderboard() {
 
     return (
         <div className="space-y-16">
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="glass p-4 sm:p-6 md:p-10 rounded-3xl border border-white/10 bg-slate-900/60 relative overflow-hidden shadow-2xl"
-            >
+            <div className="glass p-4 sm:p-6 md:p-10 rounded-3xl border border-white/10 bg-slate-900/60 relative overflow-hidden shadow-2xl animate-fade-up">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[150px] -z-10" aria-hidden="true" />
                 <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-rose-600/5 rounded-full blur-[150px] -z-10" aria-hidden="true" />
 
@@ -232,7 +225,7 @@ export function Leaderboard() {
                     Scores are composite ratings (1–5 per dimension) compiled from Artificial Analysis, HuggingFace TTS Arena, and official benchmarks.
                     Price Score: 5 = cheapest. Open-source models at $0 self-hosted.
                 </p>
-            </motion.div>
+            </div>
         </div>
     );
 }
